@@ -67,16 +67,16 @@ public class ServerManager
 
     public static void BroadcastMessage(GhostClientData sender, String messageToSend, ArrayList<GhostClientData> receivers) {
         //Broadcast message to clients
-        for(GhostClientData clientHandler : receivers) {
+        for(GhostClientData receiver : receivers) {
             try {
-                if(!clientHandler.ClientUserName.equals(sender.ClientUserName)) {
-                    clientHandler.Writer.write(messageToSend);
-                    clientHandler.Writer.newLine();
-                    clientHandler.Writer.flush();
+                if(!receiver.ClientUserName.equals(sender.ClientUserName)) {
+                    receiver.Writer.write(messageToSend);
+                    receiver.Writer.newLine();
+                    receiver.Writer.flush();
                 }
             }
             catch (IOException e) {
-                DestroyGhostClient(clientHandler);
+                DestroyGhostClient(receiver);
             }
         }
     }
